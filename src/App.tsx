@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   startOfMonth,
   endOfMonth,
   startOfWeek,
   endOfWeek,
   addDays,
-  isSameDay,
   isSameMonth,
   format,
   addMonths,
@@ -15,29 +14,23 @@ import { css, cva } from "../styled-system/css";
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const renderHeader = () => {
-    return (
-      <div className={styles.header}>
-        <button
-          onClick={() =>
-            setCurrentDate(startOfMonth(addMonths(currentDate, -1)))
-          }
-          className={styles.button}
-        >
-          Prev
-        </button>
-        <h2 className={styles.title}>{format(currentDate, "MM yyyy")}</h2>
-        <button
-          onClick={() =>
-            setCurrentDate(startOfMonth(addMonths(currentDate, 1)))
-          }
-          className={styles.button}
-        >
-          Next
-        </button>
-      </div>
-    );
-  };
+  const renderHeader = (
+    <div className={styles.header}>
+      <button
+        onClick={() => setCurrentDate(startOfMonth(addMonths(currentDate, -1)))}
+        className={styles.button}
+      >
+        Prev
+      </button>
+      <h2 className={styles.title}>{format(currentDate, "MM yyyy")}</h2>
+      <button
+        onClick={() => setCurrentDate(startOfMonth(addMonths(currentDate, 1)))}
+        className={styles.button}
+      >
+        Next
+      </button>
+    </div>
+  );
 
   const renderDays = () => {
     const days = [];
@@ -63,7 +56,7 @@ const Calendar = () => {
 
   return (
     <div className={styles.calendar}>
-      {renderHeader()}
+      {renderHeader}
       {renderDays()}
     </div>
   );
@@ -76,6 +69,7 @@ const styles = {
     width: "350px",
     boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.1)",
     backgroundColor: "#fff",
+    margin: "200px auto",
   }),
   header: css({
     display: "flex",
